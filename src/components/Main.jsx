@@ -3,32 +3,34 @@ import { useEffect, useState } from "react";
 import { requests } from "../Requests";
 import MovieCard from "./MovieCard";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 
 const Main = () => {
-  const [movies, setMovies] = useState();
-  const [movieBanner, setMovieBanner] = useState();
+  const [moviesPopular, setMoviesPopular] = useState();
+  const [moviesTopRated, setMoviesTopRated] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-  };
+  const [moviesTrending, setMoviesTrending] = useState();
 
   useEffect(() => {
-    const getMovies = async () => {
+    const getmoviesPopular = async () => {
       try {
-        const responsePopularMovies = await axios.get(requests.requestPopular);
-        setMovies(responsePopularMovies.data.results);
+        const responsePopularmoviesPopular = await axios.get(
+          requests.requestPopular
+        );
+        const responseRequestTopRated = await axios.get(
+          requests.requestTopRated
+        );
+        const responseRequestTrending = await axios.get(
+          requests.requestTrending
+        );
+        setMoviesPopular(responsePopularmoviesPopular.data.results);
+        setMoviesTopRated(responseRequestTopRated.data.results);
+        setMoviesTrending(responseRequestTrending.data.results);
         setIsLoading(false);
       } catch (error) {
         console.log(error.response);
       }
     };
-    getMovies();
+    getmoviesPopular();
   }, []);
   if (isLoading) {
     return <span>En cours de chargement...</span>;
@@ -40,7 +42,26 @@ const Main = () => {
         </h1>
 
         <div className="flex flex-nowrap overflow-hidden overflow-x-scroll scrolling-touch mx-4 ">
-          {movies.map((movie) => (
+          {moviesPopular.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
+        </div>
+        <h1 className="text-white text-2xl my-4 text-left ml-5 text font-bold ">
+          Les mieux notés
+        </h1>
+
+        <div className="flex flex-nowrap overflow-hidden overflow-x-scroll scrolling-touch mx-4 ">
+          {moviesTopRated.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
+        </div>
+
+        <h1 className="text-white text-2xl my-4 text-left ml-5 text font-bold ">
+          Les tendances de la semaine
+        </h1>
+
+        <div className="flex flex-nowrap overflow-hidden overflow-x-scroll scrolling-touch mx-4 ">
+          {moviesTrending.map((movie) => (
             <MovieCard movie={movie} key={movie.id} />
           ))}
         </div>

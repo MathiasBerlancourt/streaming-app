@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import axios from "axios";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   let [videoId, setVideoId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const randomPage = Math.floor(Math.random() * 500);
+
   const [defaultMovie, setDefaultMovie] = useState();
   const [randomMovie, setRandomMovie] = useState();
   const [mute, setMute] = useState(1);
@@ -72,9 +72,10 @@ const Banner = () => {
 
     fetchdefaultMovie();
     console.log("defaultMovie:", defaultMovie);
-  }, []);
+  }, [defaultMovie]);
 
   useEffect(() => {
+    const randomPage = Math.floor(Math.random() * 500);
     const fetchMovie = async () => {
       try {
         const {
