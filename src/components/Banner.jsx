@@ -64,7 +64,7 @@ const Banner = () => {
   useEffect(() => {
     const fetchdefaultMovie = async () => {
       const responseDefaultMovie = await fetch(
-        "https://api.themoviedb.org/3/movie/603692?api_key=d3fe78f96fadbceb0c4b919632104445&language=fr-FR"
+        ` https://api.themoviedb.org/3/movie/603692?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
       );
       const data = await responseDefaultMovie.json();
       setDefaultMovie(data);
@@ -82,7 +82,7 @@ const Banner = () => {
           data: { results },
         } = await axios.get("https://api.themoviedb.org/3/movie/popular", {
           params: {
-            api_key: "d3fe78f96fadbceb0c4b919632104445",
+            api_key: process.env.REACT_APP_API_KEY,
             language: "fr-FR",
             page: randomPage,
           },
@@ -96,7 +96,7 @@ const Banner = () => {
           `https://api.themoviedb.org/3/movie/${movie.id}/videos`,
           {
             params: {
-              api_key: "d3fe78f96fadbceb0c4b919632104445",
+              api_key: process.env.REACT_APP_API_KEY,
               language: "fr-FR",
             },
           }
