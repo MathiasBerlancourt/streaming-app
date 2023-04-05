@@ -6,7 +6,7 @@ const Main = () => {
   const { moviesPopular, moviesTopRated, moviesTrending } = useMoviesContext();
   return (
     <div className="flex  flex-col ">
-      <h1 className="text-white text-2xl my-4 text-left ml-5 text font-bold ">
+      <h1 className="text-white text-2xl my-4 text-left ml-5 text font-bold pt-12 md:pt-0">
         Les plus regardés
       </h1>
 

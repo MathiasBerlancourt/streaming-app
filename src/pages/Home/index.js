@@ -13,11 +13,12 @@ const Home = () => {
   return (
     <div>
       <MoviesProvider>
-        <Banner
-          showMovieInfosModal={showMovieInfosModal}
-          setShowMovieInfosModal={setShowMovieInfosModal}
-        />
-
+        <div className="hidden md:block">
+          <Banner
+            showMovieInfosModal={showMovieInfosModal}
+            setShowMovieInfosModal={setShowMovieInfosModal}
+          />
+        </div>
         <Main />
       </MoviesProvider>
     </div>
