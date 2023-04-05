@@ -8,3 +8,19 @@ body {
   background-color: black;
   font-family: "Lato";
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+@layer components {
+  .moviesRow {
+    @apply flex flex-nowrap overflow-hidden overflow-x-scroll mx-4;
+  }
+}

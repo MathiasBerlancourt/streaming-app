@@ -5,8 +5,9 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { FaPlay } from "react-icons/fa";
 import { BiVolumeMute, BiVolumeFull } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import MovieInfosModal from "./MovieInfosModal";
 
-const Banner = () => {
+const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
   let [videoId, setVideoId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,29 +29,7 @@ const Banner = () => {
       iv_load_policy: 3,
     },
   });
-  // const opts = useRef({
-  //   height: "100%",
-  //   width: "100%",
-  //   playerVars: {
-  //     autoplay: 1,
-  //     mute: mute,
-  //     controls: 0,
-  //     showinfo: 0,
-  //     modestbranding: 0,
-  //     enablejsapi: 1,
-  //     loop: true,
-  //     fs: 0,
-  //     iv_load_policy: 3,
-  //     // playlist: videoId,
-  //   },
-  // });
 
-  // const handleMuteButton = () => {
-  //   mute.current ? (mute.current = false) : (mute.current = true);
-  // };
-  // const handleMuteButton = () => {
-  //   mute === 1 ? setMute(0) : setMute(1);
-  // };
   const handleMuteButton = () => {
     setOpts({
       ...opts,
@@ -71,8 +50,8 @@ const Banner = () => {
     };
 
     fetchdefaultMovie();
-    console.log("defaultMovie:", defaultMovie);
-  }, [defaultMovie]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     const randomPage = Math.floor(Math.random() * 500);
@@ -120,27 +99,6 @@ const Banner = () => {
     fetchMovie();
   }, []);
 
-  // const opts = {
-  //   height: "100%",
-  //   width: "100%",
-  //   playerVars: {
-  //     autoplay: 1,
-  //     mute: mute,
-  //     controls: 0,
-  //     showinfo: 0,
-  //     modestbranding: 0,
-  //     enablejsapi: 1,
-  //     loop: true,
-  //     fs: 0,
-  //     iv_load_policy: 3,
-  //     // playlist: videoId,
-  //   },
-  // };
-
-  //opts.playerVars.mute=0
-  // useEffect(() => {
-  //   opts.current.playerVars.mute = mute;
-  // }, [mute]);
   return (
     <div className="relative h-screen overflow-hidden">
       {isLoading ? (
@@ -149,7 +107,6 @@ const Banner = () => {
         </div>
       ) : (
         <div>
-          {console.log("j'ai re render")}
           <YouTube
             videoId={videoId}
             opts={opts}
@@ -161,7 +118,7 @@ const Banner = () => {
                 ? defaultMovie.original_title
                 : randomMovie.title}
             </h1>
-            <p className="text-white text-xl font-bold text-justify w-2/3">
+            <p className="text-white text-xl font-bold text-justify w-2/3 line-clamp-5">
               {videoId === "eA3z_tTBVkc"
                 ? defaultMovie.overview
                 : randomMovie.overview}
@@ -177,14 +134,16 @@ const Banner = () => {
                     <span className="text-white ">Bande Annonce</span>
                   </button>
                 </Link>
-                <Link>
-                  <button className="flex h-12 space-x-4 w-48 items-center border border-white py-2 px-4 rounded-md">
-                    <AiOutlineInfoCircle
-                      style={{ color: "white", fontSize: "30px" }}
-                    />
-                    <span className="text-white ">Plus d'Infos</span>
-                  </button>
-                </Link>
+
+                <button
+                  onClick={() => setShowMovieInfosModal(true)}
+                  className="flex h-12 space-x-4 w-48 items-center border border-white py-2 px-4 rounded-md"
+                >
+                  <AiOutlineInfoCircle
+                    style={{ color: "white", fontSize: "30px" }}
+                  />
+                  <span className="text-white ">Plus d'Infos</span>
+                </button>
               </div>
               <div>
                 <button className="pr-24" onClick={handleMuteButton}>
@@ -202,6 +161,13 @@ const Banner = () => {
             </div>
           </div>
         </div>
+      )}
+      {showMovieInfosModal && (
+        <MovieInfosModal
+          defaultMovie={defaultMovie}
+          randomMovie={randomMovie}
+          setShowMovieInfosModal={setShowMovieInfosModal}
+        />
       )}
     </div>
   );
