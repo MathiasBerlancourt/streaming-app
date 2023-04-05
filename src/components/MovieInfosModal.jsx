@@ -11,15 +11,15 @@ const MovieInfosModal = ({
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchDetailsMovie = async () => {
-      if (defaultMovie) {
+      if (randomMovie) {
         const responseDetailsMovie = await axios.get(
-          `https://api.themoviedb.org/3/movie/${defaultMovie.id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
+          `https://api.themoviedb.org/3/movie/${randomMovie.id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
         );
         setDetailsMovie(responseDetailsMovie.data);
         setIsLoading(false);
       } else {
         const responseDetailsMovie = await axios.get(
-          `https://api.themoviedb.org/3/movie/$${randomMovie.id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
+          `https://api.themoviedb.org/3/movie/${defaultMovie.id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
         );
         setDetailsMovie(responseDetailsMovie.data);
         setIsLoading(false);
@@ -50,7 +50,7 @@ const MovieInfosModal = ({
             />
 
             <div className=" text-white p-4 sm:p-6">
-              <h2 className="mt-0.5 text-xl text-white  text-gray-900">
+              <h2 className="mt-0.5 text-xl text-white ">
                 {detailsMovie.title}
               </h2>
               <div className="flex flex-col items-start">
