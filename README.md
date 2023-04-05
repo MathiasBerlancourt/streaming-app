@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# 📺 Streaming App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📝 Description
 
-## Available Scripts
+This personal project aims to work on React with tailwind, handle authentifications, and discover new packages
 
-In the project directory, you can run:
+**It is a partial clone of Netflix, with the following features:**
 
-### `yarn start`
+- youtube embed videos
+- modals handling
+- exploitation of open source APIs
+- User authentication (wip)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 👨‍💻Data
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The products used in the project are from **[themoviedb.org](https://developers.themoviedb.org/3/getting-started/introduction)**
 
-### `yarn test`
+## ⚙️ Installation steps
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Using npm
 
-### `yarn build`
+Run commands
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. `npm install`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. `npm run dev`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Or using yarn
 
-### `yarn eject`
+Run commands
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. `npm install --global yarn`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. `yarn install`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. `yarn run dev`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deployed on Netifly (no GoogleAuth on prod) **[🔗](https://gleaming-gumdrop-0339b4.netlify.app/)**
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Texte alternatif](src/assets/img/matflexscreenshot.png "screenshot")
