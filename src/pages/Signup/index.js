@@ -8,27 +8,30 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [userConfirmMessage, setUserConfirmMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+
+    if (password !== confirmPassword) {
+      setErrorMessage("❌ Les mots de passe ne sont pas identiques");
+      return; // Stop the submission if passwords do not match
+    }
+    if (password.length < 6) {
+      setErrorMessage("❌ Le mot de passe doit contenir au moins 6 caractères");
+      return; // Stop the submission if password is less than 6 characters
+    }
     try {
       await signUp(email, password);
       navigate("/");
-      console.log("submit ok ");
     } catch (error) {
       console.log(error.message);
-      if (password !== confirmPassword) {
-        setUserConfirmMessage("❌ Les mots de passe ne sont pas identiques");
-      }
       if (error.message) {
-        setUserConfirmMessage(error.message);
+        setErrorMessage(error.message);
       }
     }
   };
-  console.log(handleSubmit);
-  console.log("apikey:", process.env.REACT_APP_FIREBASE_API_KEY);
+
   return (
     <div className="w-full h-screen">
       <img
@@ -77,7 +80,7 @@ const Signup = () => {
                 {/* <input type="submit" value="S'inscrire" /> */}S'inscrire
               </button>
               <div className="flex flex-col space-y-2">
-                <p className="text-red-600">{userConfirmMessage}</p>
+                <p className="text-red-600">{errorMessage}</p>
                 <div className="flex justify-around items-center text-sm text-gray-600">
                   <p>
                     <input type="checkbox" className="mr-2" />
