@@ -6,7 +6,8 @@ This personal project aims to work on React with tailwind, handle authentificati
 
 **It is a partial clone of Netflix, with the following features:**
 
-- youtube embed videos
+- random trailer in autoplay on the banner
+- Youtube embed videos
 - modals handling
 - exploitation of open source APIs
 - User authentication (wip)

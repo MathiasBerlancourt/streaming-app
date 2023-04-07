@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import matflex from "../assets/img/matflexLogo.png";
 import mobileLogo from "../assets/img/logoMobile.png";
-
+// import { UserAuth } from "../context/AuthContext";
 const Navbar = () => {
   return (
     <div className="flex items-center justify-between p-4 z-40 w-full absolute">
@@ -17,14 +17,14 @@ const Navbar = () => {
 
       <div className="flex gap-2">
         <Link to="/login">
-          <button className="text-white  hover:border border-white px-6 py-1 rounded cursor-pointer ">
-            Sign In
+          <button className="text-white h-8 flex items-center hover:border border-white px-6 py-1 rounded cursor-pointer ">
+            Connexion
           </button>
         </Link>
 
         <Link to="/signup">
-          <button className="bg-red-600 px-6 py-2 rounded cursor-pointer text-white">
-            Sign Up
+          <button className="bg-red-600 h-8 flex items-center px-6 py-2 rounded cursor-pointer text-white">
+            Inscription
           </button>
         </Link>
       </div>

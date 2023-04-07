@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-AuthContext.js
+# AuthContext.js
 
 # production
 /build
