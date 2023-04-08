@@ -5,10 +5,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //Components
 import Navbar from "./components/Navbar";
+
+//Pages
 import Home from "./pages/Home/index";
 import Login from "./pages/Login/index";
 import Signup from "./pages/Signup/index";
 import Account from "./pages/Account/index";
+import UserList from "./pages/UserList";
 
 function App() {
   return (
@@ -28,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/mylist" element={<UserList />} />
         </Routes>
       </AuthContextProvider>
     </>
