@@ -2,7 +2,7 @@
 
 ## 📝 Description
 
-This personal project aims to work on React with tailwind, handle authentifications, and discover new packages
+This personal project aims to work on React with tailwind, handle authentifications with firebase , set a backend with cloud firestore and discover new packages
 
 **It is a partial clone of Netflix, with the following features:**
 
@@ -10,7 +10,8 @@ This personal project aims to work on React with tailwind, handle authentificati
 - Youtube embed videos
 - modals handling
 - exploitation of open source APIs
-- User authentication (wip)
+- User authentication , user account creation
+- List of favourites movies (stock in db) and render on the user profile (wip)
 
 ## 👨‍💻Data
 
