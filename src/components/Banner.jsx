@@ -11,7 +11,7 @@ const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
   let [videoId, setVideoId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [randomMovie, setRandomMovie] = useState();
+  const [movie, setMovie] = useState();
   const [mute, setMute] = useState(1);
   const [opts, setOpts] = useState({
     height: "100%",
@@ -54,12 +54,12 @@ const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
           },
         });
 
-        const movie = results[Math.floor(Math.random() * results.length)];
+        const randomMovie = results[Math.floor(Math.random() * results.length)];
 
         const {
           data: { results: videos },
         } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movie.id}/videos`,
+          `https://api.themoviedb.org/3/movie/${randomMovie.id}/videos`,
           {
             params: {
               api_key: process.env.REACT_APP_API_KEY,
@@ -72,7 +72,7 @@ const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
         if (video) {
           setVideoId(video.key);
         }
-        setRandomMovie(movie);
+        setMovie(randomMovie);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -99,18 +99,18 @@ const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
             />
           ) : (
             <img
-              src={`https://image.tmdb.org/t/p/original/${randomMovie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
               className="w-full  h-full "
-              alt="bannerRandomMovie"
+              alt="bannermovie"
             />
           )}
 
           <div className="absolute left-36 top-1/4 flex-column  ">
             <h1 className="text-6xl font-extrabold text-left text-white">
-              {randomMovie.title}
+              {movie.title}
             </h1>
             <p className="text-white text-xl font-bold text-justify w-2/3 line-clamp-5">
-              {randomMovie.overview}
+              {movie.overview}
             </p>
             <div className="flex justify-between align-center">
               <div className="flex space-x-6 pt-8">
@@ -157,7 +157,7 @@ const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
       )}
       {showMovieInfosModal && (
         <MovieInfosModal
-          randomMovie={randomMovie}
+          movie={movie}
           setShowMovieInfosModal={setShowMovieInfosModal}
         />
       )}

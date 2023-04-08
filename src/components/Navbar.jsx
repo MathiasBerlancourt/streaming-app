@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="flex gap-2">
           <Link to="/account">
             <button className="text-white h-8 flex items-center hover:border border-white px-6 py-1 rounded cursor-pointer ">
-              My Account
+              Mon Compte
             </button>
           </Link>
 

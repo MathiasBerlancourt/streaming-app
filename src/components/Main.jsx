@@ -3,7 +3,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { useMoviesContext } from "../context/MoviesContext";
 
 const Main = () => {
-  const { moviesPopular, moviesTopRated, moviesTrending } = useMoviesContext();
+  const {
+    moviesPopular,
+    moviesTopRated,
+    moviesTrending,
+    showMovieInfosModal,
+    setShowMovieInfosModal,
+  } = useMoviesContext();
   return (
     <div className="flex  flex-col ">
       <h1 className="text-white text-2xl my-4 text-left ml-5 text font-bold pt-12 md:pt-0">
@@ -12,7 +18,14 @@ const Main = () => {
 
       <div className="moviesRow">
         {moviesPopular.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+          <>
+            <MovieCard
+              movie={movie}
+              key={movie.id}
+              showMovieInfosModal={showMovieInfosModal}
+              setShowMovieInfosModal={setShowMovieInfosModal}
+            />
+          </>
         ))}
       </div>
       <h1 className="text-white text-2xl my-4 text-left ml-5 text font-bold ">
@@ -21,7 +34,9 @@ const Main = () => {
 
       <div className="moviesRow">
         {moviesTopRated.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+          <>
+            <MovieCard movie={movie} key={movie.id} />
+          </>
         ))}
       </div>
 

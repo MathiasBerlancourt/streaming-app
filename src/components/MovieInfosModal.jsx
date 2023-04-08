@@ -5,15 +5,15 @@ import { AiFillLike, AiOutlineClose } from "react-icons/ai";
 const MovieInfosModal = ({
   setShowMovieInfosModal,
 
-  randomMovie,
+  movie,
 }) => {
   const [detailsMovie, setDetailsMovie] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchDetailsMovie = async () => {
-      if (randomMovie) {
+      if (movie) {
         const responseDetailsMovie = await axios.get(
-          `https://api.themoviedb.org/3/movie/${randomMovie.id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
+          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
         );
         setDetailsMovie(responseDetailsMovie.data);
         setIsLoading(false);
