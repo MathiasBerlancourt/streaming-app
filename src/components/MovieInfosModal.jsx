@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillLike, AiOutlineClose } from "react-icons/ai";
+import { useMoviesContext } from "../context/MoviesContext";
 
-const MovieInfosModal = ({
-  setShowMovieInfosModal,
-
-  movie,
-}) => {
+const MovieInfosModal = ({ movie }) => {
   const [detailsMovie, setDetailsMovie] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const { setShowMovieInfosModal } = useMoviesContext();
   useEffect(() => {
     const fetchDetailsMovie = async () => {
       if (movie) {
@@ -23,7 +21,7 @@ const MovieInfosModal = ({
     // eslint-disable-next-line
   }, []);
   if (isLoading) {
-    return <span>En cours de chargement...</span>;
+    return <span className="text-white">En cours de chargement...</span>;
   } else
     return (
       <div className="fixed flex items-center justify-center z-50 inset-0 overflow-auto  bg-gray-500 bg-opacity-75">
@@ -54,7 +52,10 @@ const MovieInfosModal = ({
                 <div className="flex font-bold">
                   {detailsMovie.genres &&
                     detailsMovie.genres.map((genre) => (
-                      <div className="block text-left text-xs text-gray-500">
+                      <div
+                        key={genre.id}
+                        className="block text-left text-xs text-gray-500"
+                      >
                         {genre.name}
                         {"\u00A0"}
                       </div>

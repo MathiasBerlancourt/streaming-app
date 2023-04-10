@@ -8,15 +8,13 @@ import { toast } from "react-toastify";
 import { RiMovie2Fill } from "react-icons/ri";
 import { IoTrashBinSharp } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
-
 import "react-toastify/dist/ReactToastify.css";
 
-const MovieCard = ({ movie, setShowMovieInfosModal, showMovieInfosModal }) => {
+const MovieCard = ({ movie }) => {
   const [like, setLike] = useState(false);
-  const [setSaved] = useState(false);
+  const [saved, setSaved] = useState(false);
   const { user } = UserAuth();
   const movieId = doc(db, `users`, `${user?.email}`);
-
   const addMovieNotify = () =>
     toast.success(
       `${movie.title} a été ajouté à votre liste !`,
@@ -48,7 +46,8 @@ const MovieCard = ({ movie, setShowMovieInfosModal, showMovieInfosModal }) => {
   const saveMovie = async () => {
     if (user?.email) {
       setLike(!like);
-      setSaved(true);
+      setSaved(!saved);
+
       await updateDoc(movieId, {
         savedMovies: arrayUnion({
           id: movie.id,
@@ -56,6 +55,7 @@ const MovieCard = ({ movie, setShowMovieInfosModal, showMovieInfosModal }) => {
           img: movie.backdrop_path,
         }),
       });
+
       if (!like) {
         addMovieNotify();
       } else {
@@ -65,6 +65,7 @@ const MovieCard = ({ movie, setShowMovieInfosModal, showMovieInfosModal }) => {
       messageCreateAccountNotify();
     }
   };
+
   return (
     <div
       className="  text-transparent relative flex-none w-80  mx-1 rounded-lg  object-cover shadow-md transition duration-500 ease-in-out transform hover:scale-125 hover:z-30  hover:text-white

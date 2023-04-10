@@ -6,11 +6,12 @@ import { FaPlay } from "react-icons/fa";
 import { BiVolumeMute, BiVolumeFull } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import MovieInfosModal from "./MovieInfosModal";
+import { useMoviesContext } from "../context/MoviesContext";
 
-const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
+const Banner = () => {
   let [videoId, setVideoId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const { showMovieInfosModal, setShowMovieInfosModal } = useMoviesContext();
   const [movie, setMovie] = useState();
   const [mute, setMute] = useState(1);
   const [opts, setOpts] = useState({
@@ -155,12 +156,7 @@ const Banner = ({ showMovieInfosModal, setShowMovieInfosModal }) => {
           </div>
         </div>
       )}
-      {showMovieInfosModal && (
-        <MovieInfosModal
-          movie={movie}
-          setShowMovieInfosModal={setShowMovieInfosModal}
-        />
-      )}
+      {showMovieInfosModal && <MovieInfosModal movie={movie} />}
     </div>
   );
 };
