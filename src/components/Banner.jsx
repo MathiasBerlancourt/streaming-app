@@ -11,7 +11,12 @@ import { useMoviesContext } from "../context/MoviesContext";
 const Banner = () => {
   let [videoId, setVideoId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { showMovieInfosModal, setShowMovieInfosModal } = useMoviesContext();
+  const {
+    showMovieInfosModal,
+    setShowMovieInfosModal,
+    selectedMovie,
+    setSelectedMovie,
+  } = useMoviesContext();
   const [movie, setMovie] = useState();
   const [mute, setMute] = useState(1);
   const [opts, setOpts] = useState({
@@ -29,7 +34,10 @@ const Banner = () => {
       iv_load_policy: 3,
     },
   });
-
+  const handleInfosClick = (movie) => {
+    setSelectedMovie(movie);
+    setShowMovieInfosModal(true);
+  };
   const handleMuteButton = () => {
     setOpts({
       ...opts,
@@ -128,7 +136,7 @@ const Banner = () => {
                 )}
 
                 <button
-                  onClick={() => setShowMovieInfosModal(true)}
+                  onClick={() => handleInfosClick(movie)}
                   className="flex h-12 space-x-4 w-48 items-center border border-white py-2 px-4 rounded-md"
                 >
                   <AiOutlineInfoCircle
@@ -156,7 +164,7 @@ const Banner = () => {
           </div>
         </div>
       )}
-      {showMovieInfosModal && <MovieInfosModal movie={movie} />}
+      {showMovieInfosModal && <MovieInfosModal movie={selectedMovie} />}
     </div>
   );
 };

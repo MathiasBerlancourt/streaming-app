@@ -58,7 +58,7 @@ const Navbar = () => {
           </button>
           <button
             onClick={handleLogOut}
-            className="block md:hidden flex items-center "
+            className="block md:hidden items-center "
           >
             <FiLogOut className="text-red-600 text-3xl ml-8" />
           </button>

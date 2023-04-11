@@ -30,16 +30,20 @@ const MovieInfosModal = ({ movie }) => {
             onClick={() => {
               return setShowMovieInfosModal(false);
             }}
-            className="flex  text-gray-700 hover:text-gray-600"
+            className=" pl-[95%] text-gray-400 hover:text-gray-600"
           >
             <AiOutlineClose />
           </button>
           <div className="flex  justify-around">
-            <img
-              src={`https://image.tmdb.org/t/p/original/${detailsMovie.poster_path}`}
-              alt={`${detailsMovie.title}`}
-              className="w-1/3  object-cover"
-            />
+            {detailsMovie.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/original/${detailsMovie.poster_path}`}
+                alt={`${detailsMovie.title}`}
+                className="w-1/3  object-cover"
+              />
+            ) : (
+              <span className="text-white">No poster available</span>
+            )}
 
             <div className=" text-white p-4 sm:p-6 space-y-2 ">
               <h2 className="mt-0.5 text-left text-xl text-white ">

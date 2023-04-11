@@ -10,10 +10,11 @@ import { IoTrashBinSharp } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import "react-toastify/dist/ReactToastify.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, onClick }) => {
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
   const { user } = UserAuth();
+
   const movieId = doc(db, `users`, `${user?.email}`);
   const addMovieNotify = () =>
     toast.success(
@@ -68,13 +69,18 @@ const MovieCard = ({ movie }) => {
 
   return (
     <div
+      onClick={onClick}
       className="  text-transparent relative flex-none w-80  mx-1 rounded-lg  object-cover shadow-md transition duration-500 ease-in-out transform hover:scale-125 hover:z-30  hover:text-white
     "
     >
-      <img
-        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-        alt={`${movie.title}`}
-      />
+      {movie.backdrop_path ? (
+        <img
+          src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+          alt={`${movie.title}`}
+        />
+      ) : (
+        <span className="text-white">No poster available</span>
+      )}
 
       <div className="absolute bottom-4 left-10">
         <h2>{movie.title}</h2>

@@ -5,6 +5,7 @@ export const MoviesContext = createContext({});
 
 export const MoviesProvider = ({ children }) => {
   const [showMovieInfosModal, setShowMovieInfosModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState({});
   const [moviesPopular, setMoviesPopular] = useState([]);
   const [moviesTopRated, setMoviesTopRated] = useState([]);
   const [moviesTrending, setMoviesTrending] = useState([]);
@@ -44,6 +45,8 @@ export const MoviesProvider = ({ children }) => {
           setMoviesTopRated,
           moviesTrending,
           setMoviesTrending,
+          selectedMovie,
+          setSelectedMovie,
         }}
       >
         {children}
