@@ -33,7 +33,7 @@ const Navbar = () => {
       </Link>
       {user?.email ? (
         <div className="flex gap-2">
-          <Link to="/UserList">
+          <Link to="/mylist">
             <button className="text-white h-8 hidden md:block  items-center hover:border border-white px-6 py-1 rounded cursor-pointer ">
               Ma Liste
             </button>

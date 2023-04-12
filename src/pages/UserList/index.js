@@ -1,7 +1,14 @@
-import React from "react";
-
 const UserList = () => {
-  return <div>Je suis la liste de films</div>;
+  // useEffect(() => {
+
+  // }, [user?.email]);
+  return (
+    <div>
+      <h1 className="text-3xl py-[5%] text-[#717171] md:text-5xl font-bold">
+        Ma liste de films
+      </h1>
+    </div>
+  );
 };
 
 export default UserList;

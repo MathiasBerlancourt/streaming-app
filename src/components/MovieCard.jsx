@@ -69,12 +69,12 @@ const MovieCard = ({ movie, onClick }) => {
 
   return (
     <div
-      onClick={onClick}
       className="  text-transparent relative flex-none w-80  mx-1 rounded-lg  object-cover shadow-md transition duration-500 ease-in-out transform hover:scale-125 hover:z-30  hover:text-white
     "
     >
       {movie.backdrop_path ? (
         <img
+          onClick={onClick}
           src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
           alt={`${movie.title}`}
         />
