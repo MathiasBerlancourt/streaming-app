@@ -8,7 +8,7 @@ export const useMovies = () => {
   const [moviesPopular, setMoviesPopular] = useState([]);
   const [moviesTopRated, setMoviesTopRated] = useState([]);
   const [moviesTrending, setMoviesTrending] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingMovies, setIsLoadingMovies] = useState(true);
 
   useEffect(() => {
     const getmoviesPopular = async () => {
@@ -23,7 +23,7 @@ export const useMovies = () => {
         setMoviesPopular(responsePopularmovies.data.results);
         setMoviesTopRated(responseRequestTopRated.data.results);
         setMoviesTrending(responseRequestTrending.data.results);
-        setIsLoading(false);
+        setIsLoadingMovies(false);
       } catch (error) {
         console.log(error.response);
       }
@@ -42,6 +42,6 @@ export const useMovies = () => {
     setMoviesTrending,
     selectedMovie,
     setSelectedMovie,
-    isLoading,
+    isLoadingMovies,
   };
 };
