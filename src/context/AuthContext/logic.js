@@ -19,6 +19,7 @@ export const useAuth = () => {
       unsubscribe();
     };
   }, []);
+
   const signUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password);
     setDoc(doc(db, "users", email), {
@@ -33,5 +34,6 @@ export const useAuth = () => {
   const logOut = () => {
     return signOut(auth);
   };
+
   return { logIn, logOut, signUp, user };
 };

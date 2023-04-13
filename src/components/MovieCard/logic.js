@@ -9,7 +9,7 @@ import { UserAuth } from "../../context/AuthContext";
 
 export const useMovieCard = ({ movie }) => {
   const { user } = UserAuth();
-  const [like, setLike] = useState();
+  const [like, setLike] = useState(false);
   const movieId = doc(db, `users`, `${user?.email}`);
 
   const addMovieNotify = () =>
