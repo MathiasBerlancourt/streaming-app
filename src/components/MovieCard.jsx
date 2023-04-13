@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { BsPlusCircle, BsCheckLg } from "react-icons/bs";
 import { UserAuth } from "../context/AuthContext";
@@ -10,8 +10,23 @@ import { IoTrashBinSharp } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import "react-toastify/dist/ReactToastify.css";
 
+const initialState = {
+  like: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_LIKE":
+      return { ...state, like: action.payload };
+    case "SET_SAVING":
+      return { ...state, saving: action.payload };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+}
+
 const MovieCard = ({ movie, onClick }) => {
-  const [like, setLike] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const { user } = UserAuth();
 
@@ -48,17 +63,17 @@ const MovieCard = ({ movie, onClick }) => {
     if (user?.email) {
       // if user is logged in
 
-      if (like) {
+      if (state.like) {
         await updateDoc(movieId, {
           savedMovies: arrayRemove({
             id: movie.id,
             title: movie.title,
             backdrop_path: movie.backdrop_path,
+            vote_average: movie.vote_average,
           }),
         });
-        setLike(false);
+        dispatch({ type: "SET_LIKE", payload: false });
         removeMovieNotify();
-        console.log("like after update:", like);
       } else {
         await updateDoc(movieId, {
           savedMovies: arrayUnion({
@@ -68,9 +83,8 @@ const MovieCard = ({ movie, onClick }) => {
             vote_average: movie.vote_average,
           }),
         });
-        setLike(true);
+        dispatch({ type: "SET_LIKE", payload: true });
         addMovieNotify();
-        console.log("like after update:", like);
       }
     } else {
       // if user is not logged in
@@ -99,11 +113,8 @@ const MovieCard = ({ movie, onClick }) => {
           <AiFillLike /> <p>{movie.vote_average}</p>
         </div>
       </div>
-      <div
-        onClick={() => saveMovie(movie)}
-        className="absolute text-xl right-10 bottom-6"
-      >
-        {like ? <BsCheckLg /> : <BsPlusCircle />}
+      <div onClick={saveMovie} className="absolute text-xl right-10 bottom-6">
+        {state.like ? <BsPlusCircle /> : <BsCheckLg />}
       </div>
     </div>
   );
