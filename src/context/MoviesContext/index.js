@@ -15,7 +15,7 @@ export const MoviesProvider = ({ children }) => {
     setMoviesTrending,
     selectedMovie,
     setSelectedMovie,
-    isLoading,
+    isLoadingMovies,
   } = useMovies();
 
   return (
@@ -31,7 +31,7 @@ export const MoviesProvider = ({ children }) => {
         setMoviesTrending,
         selectedMovie,
         setSelectedMovie,
-        isLoading,
+        isLoadingMovies,
       }}
     >
       {children}
