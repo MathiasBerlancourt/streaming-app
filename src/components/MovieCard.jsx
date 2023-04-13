@@ -3,7 +3,7 @@ import { AiFillLike } from "react-icons/ai";
 import { BsPlusCircle, BsCheckLg } from "react-icons/bs";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebase";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, arrayRemove, doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { RiMovie2Fill } from "react-icons/ri";
 import { IoTrashBinSharp } from "react-icons/io5";
@@ -12,10 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const MovieCard = ({ movie, onClick }) => {
   const [like, setLike] = useState(false);
-  const [saved, setSaved] = useState(false);
+
   const { user } = UserAuth();
 
-  const movieId = doc(db, `users`, `${user?.email}`);
   const addMovieNotify = () =>
     toast.success(
       `${movie.title} a été ajouté à votre liste !`,
@@ -44,25 +43,37 @@ const MovieCard = ({ movie, onClick }) => {
       }
     );
   };
+  const movieId = doc(db, `users`, `${user?.email}`);
   const saveMovie = async () => {
     if (user?.email) {
-      setLike(!like);
-      setSaved(!saved);
+      // if user is logged in
 
-      await updateDoc(movieId, {
-        savedMovies: arrayUnion({
-          id: movie.id,
-          title: movie.title,
-          img: movie.backdrop_path,
-        }),
-      });
-
-      if (!like) {
-        addMovieNotify();
-      } else {
+      if (like) {
+        await updateDoc(movieId, {
+          savedMovies: arrayRemove({
+            id: movie.id,
+            title: movie.title,
+            backdrop_path: movie.backdrop_path,
+          }),
+        });
+        setLike(false);
         removeMovieNotify();
+        console.log("like after update:", like);
+      } else {
+        await updateDoc(movieId, {
+          savedMovies: arrayUnion({
+            id: movie.id,
+            title: movie.title,
+            backdrop_path: movie.backdrop_path,
+            vote_average: movie.vote_average,
+          }),
+        });
+        setLike(true);
+        addMovieNotify();
+        console.log("like after update:", like);
       }
     } else {
+      // if user is not logged in
       messageCreateAccountNotify();
     }
   };
@@ -88,7 +99,10 @@ const MovieCard = ({ movie, onClick }) => {
           <AiFillLike /> <p>{movie.vote_average}</p>
         </div>
       </div>
-      <div onClick={saveMovie} className="absolute text-xl right-10 bottom-6">
+      <div
+        onClick={() => saveMovie(movie)}
+        className="absolute text-xl right-10 bottom-6"
+      >
         {like ? <BsCheckLg /> : <BsPlusCircle />}
       </div>
     </div>
