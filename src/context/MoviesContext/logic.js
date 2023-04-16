@@ -1,15 +1,14 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import { useEffect, useState } from "react";
+import { requests } from "../../Requests";
 import axios from "axios";
-import { requests } from "../Requests";
-export const MoviesContext = createContext({});
 
-export const MoviesProvider = ({ children }) => {
+export const useMovies = () => {
   const [showMovieInfosModal, setShowMovieInfosModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState({});
   const [moviesPopular, setMoviesPopular] = useState([]);
   const [moviesTopRated, setMoviesTopRated] = useState([]);
   const [moviesTrending, setMoviesTrending] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingMovies, setIsLoadingMovies] = useState(true);
 
   useEffect(() => {
     const getmoviesPopular = async () => {
@@ -24,38 +23,25 @@ export const MoviesProvider = ({ children }) => {
         setMoviesPopular(responsePopularmovies.data.results);
         setMoviesTopRated(responseRequestTopRated.data.results);
         setMoviesTrending(responseRequestTrending.data.results);
-        setIsLoading(false);
+        setIsLoadingMovies(false);
       } catch (error) {
         console.log(error.response);
       }
     };
     getmoviesPopular();
   }, []);
-  if (isLoading) {
-    return <span>En cours de chargement...</span>;
-  } else
-    return (
-      <MoviesContext.Provider
-        value={{
-          showMovieInfosModal,
-          setShowMovieInfosModal,
-          moviesPopular,
-          setMoviesPopular,
-          moviesTopRated,
-          setMoviesTopRated,
-          moviesTrending,
-          setMoviesTrending,
-          selectedMovie,
-          setSelectedMovie,
-        }}
-      >
-        {children}
-      </MoviesContext.Provider>
-    );
-};
 
-export default MoviesProvider;
-
-export const useMoviesContext = () => {
-  return useContext(MoviesContext);
+  return {
+    showMovieInfosModal,
+    setShowMovieInfosModal,
+    moviesPopular,
+    setMoviesPopular,
+    moviesTopRated,
+    setMoviesTopRated,
+    moviesTrending,
+    setMoviesTrending,
+    selectedMovie,
+    setSelectedMovie,
+    isLoadingMovies,
+  };
 };

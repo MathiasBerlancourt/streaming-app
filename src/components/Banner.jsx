@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import YouTube from "react-youtube";
 import axios from "axios";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -16,6 +16,7 @@ const Banner = () => {
     setShowMovieInfosModal,
     selectedMovie,
     setSelectedMovie,
+    isLoadingMovies,
   } = useMoviesContext();
   const [movie, setMovie] = useState();
   const [mute, setMute] = useState(1);
@@ -48,6 +49,14 @@ const Banner = () => {
     });
     setMute(mute === 1 ? 0 : 1);
   };
+
+  const loader = useMemo(() => {
+    if (isLoading || isLoadingMovies) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [isLoading, isLoadingMovies]);
 
   useEffect(() => {
     const randomPage = Math.floor(Math.random() * 500);
@@ -94,7 +103,7 @@ const Banner = () => {
 
   return (
     <div className="relative h-screen overflow-hidden">
-      {isLoading ? (
+      {loader ? (
         <div className="flex justify-center items-center h-full">
           <p>Loading...</p>
         </div>
