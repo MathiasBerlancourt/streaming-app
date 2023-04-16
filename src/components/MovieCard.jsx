@@ -29,7 +29,7 @@ const MovieCard = ({ movie, onClick }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { user } = UserAuth();
-
+  console.log(user);
   const addMovieNotify = () =>
     toast.success(
       `${movie.title} a été ajouté à votre liste !`,
@@ -114,7 +114,7 @@ const MovieCard = ({ movie, onClick }) => {
         </div>
       </div>
       <div onClick={saveMovie} className="absolute text-xl right-10 bottom-6">
-        {state.like ? <BsPlusCircle /> : <BsCheckLg />}
+        {state.like ? <BsCheckLg /> : <BsPlusCircle />}
       </div>
     </div>
   );
