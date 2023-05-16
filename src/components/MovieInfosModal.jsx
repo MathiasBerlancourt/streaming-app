@@ -25,14 +25,14 @@ const MovieInfosModal = ({ movie }) => {
   } else
     return (
       <div className="fixed flex items-center justify-center z-50 inset-0 overflow-auto  bg-gray-500 bg-opacity-75">
-        <article className="bg-black p-6 w-1/2 overflow-hidden h-4/5 rounded-lg shadow transition hover:shadow-lg">
+        <article className="bg-black p-6 sm:w-1/2 overflow-hidden sm:h-3/5 rounded-lg shadow transition hover:shadow-lg">
           <button
             onClick={() => {
               return setShowMovieInfosModal(false);
             }}
             className=" pl-[95%] text-gray-400 hover:text-gray-600"
           >
-            <AiOutlineClose />
+            <AiOutlineClose className="text-2xl sm:text-md" />
           </button>
           <div className="flex  justify-around">
             {detailsMovie.poster_path ? (
@@ -74,8 +74,8 @@ const MovieInfosModal = ({ movie }) => {
                   <br />
                   <span className="flex">
                     Pistes disponibles :
-                    {detailsMovie.spoken_languages.map((language) => (
-                      <p>
+                    {detailsMovie.spoken_languages.map((language, index) => (
+                      <p key={index}>
                         {language.name}
                         {"\u00A0"}{" "}
                       </p>
@@ -85,7 +85,7 @@ const MovieInfosModal = ({ movie }) => {
               </div>
             </div>
           </div>
-          <p className="mx-8 pt-8 text-sm text-justify leading-relaxed  text-gray-500 ">
+          <p className="mx-8 pt-8 text-sm text-justify leading-relaxed text-gray-500 ">
             {detailsMovie.overview}
           </p>
         </article>

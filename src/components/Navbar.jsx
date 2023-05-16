@@ -38,7 +38,7 @@ const Navbar = () => {
               Ma Liste
             </button>
             <button className="block md:hidden ml-8items-center ">
-              <AiFillStar className="text-white text-3xl" />
+              <AiFillStar className="text-white text-3xl  " />
             </button>
           </Link>
           <Link to="/account">
