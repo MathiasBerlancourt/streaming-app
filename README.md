@@ -37,6 +37,4 @@ Run commands
 
 3. `yarn run dev`
 
-## Deployed on Netifly (no GoogleAuth on prod) **[🔗](https://gleaming-gumdrop-0339b4.netlify.app/)**
-
 ![Texte alternatif](src/assets/img/matflexscreenshot.png "screenshot")
